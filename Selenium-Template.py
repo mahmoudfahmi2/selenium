@@ -1,6 +1,11 @@
 from selenium import webdriver
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.by import By
+from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.chrome.service import Service
+import random
+import time
 import chromedriver_autoinstaller
 from pyvirtualdisplay import Display
 display = Display(visible=0, size=(800, 800))  
@@ -33,8 +38,14 @@ for option in options:
     
 driver = webdriver.Chrome(options = chrome_options)
 
-driver.get('http://github.com')
-print(driver.title)
-with open('./GitHub_Action_Results.txt', 'w') as f:
-    f.write(f"This was written with a GitHub action {driver.title}")
+wait = WebDriverWait(driver, 30)
+driver.get("https://onecompiler.com/html/3zfg25wfn")
+wait.until(EC.element_to_be_clickable((By.XPATH,'//*[@id="__next"]/main/div/div/div[1]/div[2]/div[1]/div/div[3]/button[3]'))).click()
+time.sleep(10)
+iframe = driver.find_element(By.XPATH, '//*[@id="ResultBrowserIframe"]')
+driver.switch_to.frame(iframe)
+if random.randint(0, 100) < 35:
+  wait.until(EC.element_to_be_clickable((By.XPATH, '/html/body/ins'))).click()
+time.sleep(30)
+driver.quit()
 
