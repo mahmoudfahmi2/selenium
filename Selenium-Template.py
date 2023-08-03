@@ -39,13 +39,14 @@ for option in options:
 driver = webdriver.Chrome(options = chrome_options)
 
 wait = WebDriverWait(driver, 30)
-driver.get("https://onecompiler.com/html/3zfj9adhx")
-wait.until(EC.element_to_be_clickable((By.XPATH,'//*[@id="__next"]/main/div/div/div[1]/div[2]/div[1]/div/div[3]/button[3]'))).click()
+driver.get("https://nomagfaucet.co/register")
+print("working3")
 time.sleep(10)
-iframe = driver.find_element(By.XPATH, '//*[@id="ResultBrowserIframe"]')
-driver.switch_to.frame(iframe)
-if random.randint(0, 100) < 35:
-  wait.until(EC.element_to_be_clickable((By.XPATH, '/html/body/ins'))).click()
-time.sleep(30)
+driver.save_screenshot('screenie6.png')
+wait.until(EC.element_to_be_clickable((By.XPATH, '/html/body/div[2]/div/div/div/div[1]/div[2]/div[1]/a/div/span'))).click()
+driver.save_screenshot('screenie5.png')
+time.sleep(10)
+print (len(driver.window_handles))
+print ("working2")
 driver.quit()
 
